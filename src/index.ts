@@ -10,7 +10,7 @@ import Configuration from "./Types/Configuration";
 
 const app = express();
 app.set("view engine", "ejs");
-app.set('views', '../views')
+app.set('views', '/app/views')
 
 const eventHandler = new xml();
 
@@ -94,4 +94,4 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 })
 
-app.use("/assets", express.static(__dirname + '/../assets'));
+app.use("/assets", express.static('/app/assets'));
