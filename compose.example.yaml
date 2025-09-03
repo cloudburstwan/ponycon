@@ -1,7 +1,0 @@
-services:
-  website:
-    build: .
-    restart: unless-stopped
-    volumes:
-      - ./data/config.json:/app/data/config.json
-      - ./data/events.xml:/app/data/events.xml

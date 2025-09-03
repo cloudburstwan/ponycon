@@ -1,0 +1,15 @@
+services:
+  website:
+    build: .
+    hostname: ponycon-website
+    restart: unless-stopped
+    networks:
+      - proxy
+    volumes:
+      - ./data/config.json:/app/data/config.json
+      - ./data/events.xml:/app/data/events.xml
+
+networks:
+  proxy:
+    name: "proxy"
+    external: true
