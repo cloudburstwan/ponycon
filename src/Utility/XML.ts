@@ -25,7 +25,7 @@ export default class XML {
         this._parse();
         this._removeOldEvents();
 
-        watchFile("../data/events.xml", () => {
+        watchFile("/app/data/events.xml", () => {
             this._parse();
         });
 
@@ -59,7 +59,7 @@ export default class XML {
         let xmlString = xml.json2xml(JSON.stringify(this.rawEventData, null, 4), { compact: false, spaces: 4 });
 
         try {
-            writeFileSync("../data/events.xml", xmlString);
+            writeFileSync("/app/data/events.xml", xmlString);
         } catch (err: any) {
             console.warn("Encountered error while saving events.xml: " + err.message);
         }
@@ -68,7 +68,7 @@ export default class XML {
     _parse() {
         this.events = [];
         
-        let xmlString = readFileSync("../data/events.xml").toString();
+        let xmlString = readFileSync("/app/data/events.xml").toString();
 
         let xmlData = JSON.parse(xml.xml2json(xmlString, {compact: false}));
 

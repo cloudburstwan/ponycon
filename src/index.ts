@@ -14,10 +14,10 @@ app.set('views', '../views')
 
 const eventHandler = new xml();
 
-let config: Configuration = JSON.parse(readFileSync("../data/config.json").toString());
+let config: Configuration = JSON.parse(readFileSync("/app/data/config.json").toString());
 
-watchFile("../data/config.json", () => {
-    config = JSON.parse(readFileSync("../data/config.json").toString());
+watchFile("/app/data/config.json", () => {
+    config = JSON.parse(readFileSync("/app/data/config.json").toString());
 });
 
 app.get("/", (req, res) => {
