@@ -21,7 +21,7 @@ export default class Event {
     }
 
     get icon() {
-        if (existsSync("../assets/events/"+this.id+".png")) return "/assets/events/"+this.id+".png";
+        if (existsSync("/app/assets/events/"+this.id+".png")) return "/assets/events/"+this.id+".png";
         return "/assets/img/placeholder.png";
     }
 
