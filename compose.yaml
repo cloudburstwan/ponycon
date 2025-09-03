@@ -8,6 +8,7 @@ services:
     volumes:
       - ./data/config.json:/app/data/config.json
       - ./data/events.xml:/app/data/events.xml
+      - ./assets/events:/app/assets/events
 
 networks:
   proxy:
