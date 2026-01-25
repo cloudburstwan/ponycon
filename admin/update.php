@@ -19,11 +19,11 @@ unset($data["id"]);
 unset($data["logo"]);
 
 if ($id === "" || isset($data["_duplicate"])) {
-    $oldLogoLocation = $_SERVER['DOCUMENT_ROOT'] . "/../assets/events/" . $id . ".png";
+    $oldLogoLocation = $_SERVER['DOCUMENT_ROOT'] . "/assets/events/" . $id . ".png";
     $id = uuidv4(openssl_random_pseudo_bytes(16));
     if (isset($data["_duplicate"])) {
         // Copies the existing logo, if it exists.
-        copy($oldLogoLocation, $_SERVER['DOCUMENT_ROOT'] . "/../assets/events/" . $id . ".png");
+        copy($oldLogoLocation, $_SERVER['DOCUMENT_ROOT'] . "/assets/events/" . $id . ".png");
     }
 }
 
@@ -118,12 +118,12 @@ if (!isset($data["_delete"])) $list[$id] = $data;
 
 if (isset($logo)) {
     if (str_starts_with($logo["type"], "image/")) {
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/../assets/events/" . $id . ".png", base64_decode($logo["data"]));
+        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/assets/events/" . $id . ".png", base64_decode($logo["data"]));
     }
 }
 
-file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/../data/events.bak", file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/../data/events.xml"));
-file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/../data/events.xml", export_event_list());
+file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/data/events.bak", file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/data/events.xml"));
+file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/data/events.xml", export_event_list());
 
 $shortenedId = "";
 foreach( explode("-", $id) as $section) {

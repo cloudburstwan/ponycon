@@ -25,7 +25,7 @@ if (!$isLoggedIn) {
     header("Location: /auth/login.php");
 }
 
-$eventXml = simplexml_load_string(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../data/events.xml"), "SimpleXMLElement", LIBXML_NOCDATA);
+$eventXml = simplexml_load_string(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/data/events.xml"), "SimpleXMLElement", LIBXML_NOCDATA);
 $eventJson = json_encode($eventXml);
 $eventArray = json_decode($eventJson,true);
 
