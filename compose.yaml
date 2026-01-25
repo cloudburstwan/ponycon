@@ -11,6 +11,7 @@ services:
       - ./assets/events:/app/assets/events
   admin:
     image: trafex/php-nginx:latest
+    hostname: ponycon-admin
     restart: unless-stopped
     networks:
       - proxy
