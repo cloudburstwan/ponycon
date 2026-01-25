@@ -88,7 +88,7 @@ function UUIDtoShortID(uuid: string) {
     return shortId.join("");
 }
 
-let port = 9218;
+let port = 80;
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
