@@ -10,7 +10,7 @@ services:
       - ./data/events.xml:/app/data/events.xml
       - ./assets/events:/app/assets/events
   admin:
-    image: trafex/php-nginx:latest
+    build: ./admin
     hostname: ponycon-admin
     restart: unless-stopped
     networks:
