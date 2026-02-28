@@ -2,15 +2,11 @@
 
 header("Content-Type: text/plain");
 
-print($_GET['code']);
-
 if (!isset($_GET['code'])) {
     die();
 }
 
 $appdata = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/private/oauth.json"), true);
-
-print("got app data");
 
 $crl = curl_init('https://discord.com/api/oauth2/token');
 curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -26,12 +22,9 @@ curl_setopt($crl, CURLOPT_POSTFIELDS, "grant_type=authorization_code&redirect_ur
 $result = curl_exec($crl);
 $app = json_decode($result, true);
 
-print("token verified");
-
 curl_close($crl);
 
 if (isset($app["access_token"])) {
-    print(" access token found - getting user");
     $crlUsr = curl_init('https://discord.com/api/v10/users/@me');
     curl_setopt($crlUsr, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($crlUsr, CURLINFO_HEADER_OUT, true);
@@ -43,10 +36,6 @@ if (isset($app["access_token"])) {
     $resultUsr = curl_exec($crlUsr);
     $user = json_decode($resultUsr, true);
 
-    print(" got user");
-    var_dump($user);
-    
-    print(" getting member");
     $crlMem = curl_init("https://discord.com/api/v10/users/@me/guilds/1279891341509394505/member");
     curl_setopt($crlMem, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($crlMem, CURLINFO_HEADER_OUT, true);
@@ -57,9 +46,6 @@ if (isset($app["access_token"])) {
 
     $resultMem = curl_exec($crlMem);
     $member = json_decode($resultMem, true);
-
-    print(" got member");
-    var_dump($member);
 
     if (!in_array($appdata["allowedRole"], $member["roles"])) {
         header("Location: https://ponycon.info/");
@@ -72,7 +58,6 @@ if (isset($app["access_token"])) {
     file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/private/tokens/" . $token, json_encode($user));
     header("Set-Cookie: PCIA_SESSION_TOKEN=" . $token . "; SameSite=None; Path=/; Secure; HttpOnly; Expires=" . date("r", time() + (86400 * 730)));
 
-    print("work");
     header("Location: /");
     die();
 } else {
