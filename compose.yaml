@@ -17,8 +17,8 @@ services:
       - proxy
     volumes:
       - ./admin:/var/www/html
-      - ./data:/data
-      - ./assets:/assets
+      - ./data:/var/www/html/data
+      - ./assets:/var/www/html/assets
 
 networks:
   proxy:
