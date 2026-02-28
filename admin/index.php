@@ -180,7 +180,7 @@
                         <input type="file" id="logo" onchange="updateLogo();"><br>
                         <img id="logo-preview" style="border: 1px solid black; height: 96px; max-width: 100%; margin-top: 20px;">
                         <script>
-                            let defaultLogo = "<?= isset($_GET['i']) && file_exists($_SERVER['DOCUMENT_ROOT'] . "/../assets/events/" . $_GET['i'] . ".png") ? "https://ponycon.info/assets/events/" . $_GET['i'] . ".png" : "https://ponycon.info/assets/img/placeholder.png" ?>";
+                            let defaultLogo = "<?= isset($_GET['i']) && file_exists($_SERVER['DOCUMENT_ROOT'] . "/assets/events/" . $_GET['i'] . ".png") ? "https://ponycon.info/assets/events/" . $_GET['i'] . ".png" : "https://ponycon.info/assets/img/placeholder.png" ?>";
 
                             function updateLogo() {
                                 if (!document.getElementById("logo").files[0]) {
