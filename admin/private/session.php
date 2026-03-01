@@ -103,12 +103,12 @@ if (isset($eventArray["event"])) {
     }
 }
 
-function make_safe_for_xml(string) {
-    var safeForXml = string;
-    safeForXml = str_replace("<", "$lt;", safeForXml);
-    safeForXml = str_replace(">", "&gt;", safeForXml);
-    safeForXml = str_replace("&", "&amp;", safeForXml);
-    return safeForXml
+function make_safe_for_xml($string) {
+    $safeForXml = $string;
+    $safeForXml = str_replace("<", "$lt;", $safeForXml);
+    $safeForXml = str_replace(">", "&gt;", $safeForXml);
+    $safeForXml = str_replace("&", "&amp;", $safeForXml);
+    return $safeForXml
 }
 
 function export_event_list() {
