@@ -108,7 +108,7 @@ function make_safe_for_xml($string) {
     $safeForXml = str_replace("<", "$lt;", $safeForXml);
     $safeForXml = str_replace(">", "&gt;", $safeForXml);
     $safeForXml = str_replace("&", "&amp;", $safeForXml);
-    return $safeForXml
+    return $safeForXml;
 }
 
 function export_event_list() {
