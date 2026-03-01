@@ -103,6 +103,14 @@ if (isset($eventArray["event"])) {
     }
 }
 
+function make_safe_for_xml(string) {
+    var safeForXml = string;
+    safeForXml = str_replace("<", "$lt;", safeForXml);
+    safeForXml = str_replace(">", "&gt;", safeForXml);
+    safeForXml = str_replace("&", "&amp;", safeForXml);
+    return safeForXml
+}
+
 function export_event_list() {
     global $list;
 
@@ -111,8 +119,8 @@ function export_event_list() {
     foreach ($list as $id => $event) {
         $str .= "    <event id=\"" . str_replace("\"", "\\\"", $id) . "\" type=\"" . str_replace("\"", "\\\"", $event["type"]) . "\" hidden=\"" . (isset($event["hidden"]) && $event["hidden"] ? "true" : "false") . "\" showtimes=\"" . (isset($event["show_times"]) && $event["show_times"] ? "true" : "false") . "\">\n";
 
-        if (isset($event["name"])) $str .= "        <name>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["name"])) . "</name>\n";
-        if (isset($event["summary"])) $str .= "        <summary>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["summary"])) . "</summary>\n";
+        if (isset($event["name"])) $str .= "        <name>" . make_safe_for_xml($event["name"]) . "</name>\n";
+        if (isset($event["summary"])) $str .= "        <summary>" . make_safe_for_xml($event["summary"]) . "</summary>\n";
 
         if (isset($event["irl"]) && $event["irl"]) $str .= "        <irl/>\n";
         if (isset($event["online"]) && $event["online"]) $str .= "        <online/>\n";
@@ -138,26 +146,26 @@ function export_event_list() {
         }
         if (isset($event["location"])) {
             $str .= "        <location>\n";
-            $str .= "            <name>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["location"]["name"])) . "</name>\n";
+            $str .= "            <name>" . make_safe_for_xml($event["location"]["name"]) . "</name>\n";
 
             if (isset($event["location"]["openstreetmap"])) {
                 $str .= "            <openstreetmap>\n";
-                $str .= "                <name>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["location"]["openstreetmap"]["name"])) . "</name>\n";
-                $str .= "                <url>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["location"]["openstreetmap"]["url"])) . "</url>\n";
+                $str .= "                <name>" . make_safe_for_xml($event["location"]["openstreetmap"]["name"]) . "</name>\n";
+                $str .= "                <url>" . make_safe_for_xml($event["location"]["openstreetmap"]["url"]) . "</url>\n";
                 $str .= "            </openstreetmap>\n";
             }
 
             if (isset($event["location"]["googlemaps"])) {
                 $str .= "            <googlemaps>\n";
-                $str .= "                <name>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["location"]["googlemaps"]["name"])) . "</name>\n";
-                $str .= "                <url>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["location"]["googlemaps"]["url"])) . "</url>\n";
+                $str .= "                <name>" . make_safe_for_xml($event["location"]["googlemaps"]["name"]) . "</name>\n";
+                $str .= "                <url>" . make_safe_for_xml($event["location"]["googlemaps"]["url"]) . "</url>\n";
                 $str .= "            </googlemaps>\n";
             }
 
             if (isset($event["location"]["applemaps"])) {
                 $str .= "            <applemaps>\n";
-                $str .= "                <name>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["location"]["applemaps"]["name"])) . "</name>\n";
-                $str .= "                <url>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["location"]["applemaps"]["url"])) . "</url>\n";
+                $str .= "                <name>" . make_safe_for_xml($event["location"]["applemaps"]["name"]) . "</name>\n";
+                $str .= "                <url>" . make_safe_for_xml($event["location"]["applemaps"]["url"]) . "</url>\n";
                 $str .= "            </applemaps>\n";
             }
 
@@ -168,20 +176,20 @@ function export_event_list() {
 
         foreach ($event["socials"] as $platform => $social) {
             $str .= "            <" . str_replace("<", "-", str_replace(">", "-", $platform)) . ">\n";
-            $str .= "                <url>" . $social["url"] . "</url>\n";
+            $str .= "                <url>" . make_safe_for_xml($social["url"]) . "</url>\n";
             $str .= "                <live>" . ($social["live"] ? "true" : "false") . "</live>\n";
             $str .= "            </" . str_replace("<", "-", str_replace(">", "-", $platform)) . ">\n";
         }
 
         $str .= "        </socials>\n";
 
-        if (isset($event["website"])) $str .= "        <website>" . str_replace("<", "&lt;", str_replace(">", "&gt;", $event["website"])) . "</website>\n";
+        if (isset($event["website"])) $str .= "        <website>" . make_safe_for_xml($event["website"]) . "</website>\n";
 
         if (!isset($event["streaming"]["ponyStream"]) and !isset($event["streaming"]["ponyTown"])) {
             $str .= "        <streaming enabled=\"" . ($event["streaming"]["enabled"] == true ? "true" : "false") . "\" />\n";
         } else {
             $str .= "        <streaming enabled=\"" . ($event["streaming"]["enabled"] == true ? "true" : "false") . "\">\n";
-            if (isset($event["streaming"]["stream"])) $str .= "            <stream>" . $event["streaming"]["stream"] . "</stream>\n";
+            if (isset($event["streaming"]["stream"])) $str .= "            <stream>" . make_safe_for_xml($event["streaming"]["stream"]) . "</stream>\n";
             if (isset($event["streaming"]["ponyTown"])) $str .= "            <ponyTown>" . $event["streaming"]["ponyTown"] . "</ponyTown>\n";
             $str .= "        </streaming>\n";
         }
