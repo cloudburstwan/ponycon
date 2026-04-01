@@ -95,15 +95,9 @@
                     <li class="nav-item a11y-skip">
                         <a class="nav-link" href="#list" tabindex="0">Skip to main content</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="https://discord.gg/6GsGgGbkmN" tabindex="0">Discord</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="https://twitter.com/Con_Countdown" tabindex="0">Twitter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a rel="me" class="nav-link" target="_blank" href="https://pony.social/@coninfo" tabindex="0">Mastodon</a>
-                    </li>
+                    <!--<li class="nav-item">
+
+                    </li>-->
                     <li class="nav-item theme-switcher">
                         <a onclick="switchTheme();" class="theme-switcher-button" tabindex="0">
                             <img alt="Theme" id="theme-switcher-img" src="/assets/img/dark.svg">
@@ -362,10 +356,16 @@
     </div>
 </main>
 
-<footer>
+<footer style="--bs-nav-link-hover-color: #ffffc4;">
     <div class="container text-muted">
-        <% /* © 2022- <\%= new Date().getFullYear() %\> <a href="https://equestria.horse" class="text-muted">Cloudburst (Leah)</a> */ %>
-        © 2022 - <%= new Date().getFullYear() %> <a href="https://cloudburst.lgbt/" target="_blank" class="text-muted">Cloudburst</a>
+        <div class="container-flex">
+            <span>© 2022 - <%= new Date().getFullYear() %> <a href="https://cloudburst.lgbt/" target="_blank" class="nav-link d-inline">Cloudburst</a></span>
+            <span class="float-end">
+                <a class="nav-link d-inline" target="_blank" href="https://discord.gg/6GsGgGbkmN" tabindex="0">Discord</a> •
+                <a class="nav-link d-inline" target="_blank" href="https://twitter.com/Con_Countdown" tabindex="0">Twitter</a> •
+                <a rel="me" class="nav-link d-inline" target="_blank" href="https://pony.social/@coninfo" tabindex="0">Mastodon</a>
+            </span>
+        </div>
     </div>
 </footer>
 
