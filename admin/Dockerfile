@@ -1,4 +1,4 @@
-FROM trafex/php-nginx:latest
+FROM trafex/php-nginx:3.10.0
 
 # Temporarily switch to root again so that we can install php84-xml
 USER root
